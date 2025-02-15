@@ -13,6 +13,22 @@ public class Order {
     int orderId;
     int totalPrice;
 
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
     @ManyToMany(fetch = FetchType.LAZY,
             cascade = {CascadeType.PERSIST, CascadeType.MERGE,
                     CascadeType.DETACH, CascadeType.REFRESH})
@@ -23,7 +39,7 @@ public class Order {
     )
     List<Item> itemList;
 
-    public Order( int totalPrice) {
+    public Order(int totalPrice) {
 
         this.totalPrice = totalPrice;
     }

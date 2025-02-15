@@ -21,6 +21,7 @@ public class OrderController {
 
     @PostMapping(path = "/addOrder")
     public void createOrder(@RequestBody Order order, @RequestParam List<Integer> itemIds) {
+        System.out.println(order.getTotalPrice());
         orderService.saveOrder(order,itemIds);
     }
 }
