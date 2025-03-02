@@ -23,12 +23,13 @@ public class AuthenticationService {
                 .username(request.getUsername())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .name(request.getName())
-                .role(Role.USER)
+                .role(Role.ADMIN)
                 .build();
         userRepository.save(user);
-        var jwtToken = jwtService.generteToken(user);
+        var jwtToken = jwtService.generteToken(user,user.getRole().name());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .role(user.getRole().name())
                 .build();
 
     }
@@ -42,9 +43,10 @@ public class AuthenticationService {
         );
         var user=userRepository.findByUsername(request.getUsername())
                 .orElseThrow();
-        var jwtToken = jwtService.generteToken(user);
+        var jwtToken = jwtService.generteToken(user,user.getRole().name());
         return AuthenticationResponse.builder()
                 .token(jwtToken)
+                .role(user.getRole().name())
                 .build();
 
     }
